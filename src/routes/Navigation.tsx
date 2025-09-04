@@ -1,45 +1,31 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  NavLink
-} from 'react-router-dom';
-
-import logo from '../logo.svg';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import logo from '../logo.svg'; // Ajusta según tu estructura
 
 export const Navigation = () => {
   return (
-    <Router>
+    <BrowserRouter
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true
+      }}
+    >
       <div className="main-layout">
         <nav>
-            <img src={ logo } alt="React Logo" />
+          <img src={logo} alt="React Logo" />
+
           <ul>
-            <li>
-              <NavLink to="/" activeClassName="nav-active" exact>Home</NavLink>
-            </li>
-            <li>
-              <NavLink to="/about" activeClassName="nav-active" exact>About</NavLink>
-            </li>
-            <li>
-              <NavLink to="/users" activeClassName="nav-active" exact>Users</NavLink>
-            </li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/about">About</Link></li>
+            <li><Link to="/users">Users</Link></li>
           </ul>
         </nav>
 
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/about">
-            <h1>About</h1>
-          </Route>
-          <Route path="/users">
-            <h1>Users</h1>
-          </Route>
-          <Route path="/">
-            <h1>Home</h1>
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/about" element={<h1>About</h1>} />
+          <Route path="/users" element={<h1>Users</h1>} />
+          <Route path="/" element={<h1>Home</h1>} />
+        </Routes>
       </div>
-    </Router>
+    </BrowserRouter>
   );
-}
+};
